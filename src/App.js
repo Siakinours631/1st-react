@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Button from './Button';
+import ProductsList from './ProductsList';
 
 function App() {
   return (
@@ -8,8 +9,12 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          coucou <Button />
-        
+          <Button />
+          <ProductsList toto='red'>
+            <p>
+              toto
+            </p>
+          </ProductsList>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
@@ -24,5 +29,8 @@ function App() {
     </div>
   );
 }
+
+
+
 
 export default App;
