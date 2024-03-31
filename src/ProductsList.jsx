@@ -13,7 +13,10 @@ const Maptoto = [
   );
 */
   const ProductsList = ({children, toto}) => {
-    return (<span style={{color: toto}}>{children}</span>) 
+    return (
+      <span style={{color: toto}}>{children}</span>
+    ) 
   }
+
   export default ProductsList
   
