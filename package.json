@@ -12,9 +12,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "clean": "clear && rm -rf build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test",    
+    "test2": "prompt",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
