@@ -1,10 +1,12 @@
-const Siakinours = (props) => {
+import Avatar from '@mui/material/Avatar';
 
-  console.log(props.bonjour)
+
+const Siakinours = ({forme}) => {
+
 return (
   <> 
-    <img src="./images/logo-siak.png" alt="Logo Siakinours"/>
-
+    <Avatar variant={forme} src='images/logo-siak.png' style={{height: "16rem", width:"16rem"}}/> 
+ 
   </> )
 }
 

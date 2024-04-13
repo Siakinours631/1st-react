@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import Button from './Button';
 import ProductsList from './ProductsList';
@@ -6,36 +7,34 @@ import Siakinours from './Siakinours';
 import BarreDeRecherche from './BarreDeRecherche'
 
 function App() {
+  const [avatarForm, setAvatarForm]= useState('circular')
   return (
     <div className="App">
       <header className="App-header"> 
         <div>
         <BarreDeRecherche input="reda" color="blue" />
         </div>
-      {/*ici je vais mettre un texte au dessus de l'image*/} 
+
         <Texte couleur='red'/>
+          <div>
+            <select defaultValue={avatarForm} onChange={(e)=>{setAvatarForm(e.target.value)}}>
+              <option value="rounded">rounded</option>
+              <option value="circular">circular</option>
+              <option value="square">square</option>
+            </select>
+            </div>
+
         <div className='App-logo'>
-          <Siakinours hello='bonjour'>
-           hoho
-         </Siakinours>
-        </div>  
-        <p>
+          <Siakinours forme={avatarForm} />
+           </div>  
+
           <Button />
+        <p>
           <ProductsList toto='red'>
-            
               toto
-            
-          </ProductsList>
-          Edit <code>src/App.js</code> and save to reload.
+           </ProductsList>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >  
-          Learn React 
-        </a>
+        
       </header> 
     </div> 
   ); 
