@@ -3,11 +3,13 @@ import Button from './Button';
 import ProductsList from './ProductsList';
 import Texte from './Texte';
 import Siakinours from './Siakinours';
+import BarreDeRecherche from './BarreDeRecherche'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header"> 
+        <BarreDeRecherche input="reda" color="blue" />
       {/*ici je vais mettre un texte au dessus de l'image*/} 
         <Texte couleur='red'/>
         <div className='App-logo'>
