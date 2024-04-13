@@ -9,7 +9,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"> 
+        <div>
         <BarreDeRecherche input="reda" color="blue" />
+        </div>
       {/*ici je vais mettre un texte au dessus de l'image*/} 
         <Texte couleur='red'/>
         <div className='App-logo'>

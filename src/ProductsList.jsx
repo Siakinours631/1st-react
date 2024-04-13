@@ -18,5 +18,4 @@ const Maptoto = [
     ) 
   }
 
-  export default ProductsList
-  
+  export default ProductsList 
