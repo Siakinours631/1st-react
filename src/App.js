@@ -5,7 +5,6 @@ import ProductsList from './ProductsList';
 import Texte from './Texte';
 import Siakinours from './Siakinours';
 import BarreDeRecherche from './BarreDeRecherche'
-import Calendar from './Calendar'
 
 function App() {
   const [avatarForm, setAvatarForm]= useState('circular')
@@ -14,7 +13,6 @@ function App() {
       <header className="App-header"> 
         <div>
           <BarreDeRecherche input="reda" color="blue" />
-          <Calendar />
         </div>
 
 
