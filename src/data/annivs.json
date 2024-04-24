@@ -1,8 +1,10 @@
-{
-  "kaiss": "25-septembre",
-  "cedric": "4-septembre",
-  "eline": "29-septembre",
-  "reda": "29-octobre",
-  "sophieMamanEline": "8-novembre"
-  
-}
+[
+  {
+    "name": "kaiss",
+    "date": "25/09/2007"
+  },
+  {
+    "name": "cedric",
+    "date": "04/09/1983"
+  }
+]

@@ -1,42 +1,63 @@
-import { Fragment, useState } from "react";
-import data from "./data/annivs.json";
+import { Fragment, useState } from "react"
+import users from "./data/annivs.json"
 
-const SearchBar = ({input, color}) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const SearchBar = ({color, couleur}) => {
+  const initialState = `${new Date().toLocaleDateString()}`
+  
 
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
+  const [searchTerm, setSearchTerm] = useState(initialState)
+  const [searchResult, setSearchResult] = useState()
+
+
+  const recherche = (e, couleur) => {
+    const date = e.target.value
+
+    const userFound = users.find(users => users.date === date)
+    if(userFound && date.length === 10)  
+    
+      {
+      setSearchResult(userFound.name)
+    }
+    else {
+        setSearchResult('Aucun anniversaire trouvé à cette date, désolé.')
+    }
+  setSearchTerm(date)
   }
 
 
-  
-  // operation ternaire
-  //  const birthday = searchTerm ? data[searchTerm] : "";
-/*
-if(searchTerm) {
-  birthday = data[searchTerm]
-} 
-else {
-  birthday = ""
-}
-*/
-
+    /*
+      if (users[userIndex].date === date) {
+        users[userIndex].name 
+      } 
+      else {
+        console.log('nothing')
+      } 
+      // console.log(users[0].date)  index
+    
+      for (const userIndex in users) {
+    console.log(users[userIndex].date)
+    */
 
 return (
   <Fragment>
     <input
-      type="text"
-      placeholder={`${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()} `}
-      value={`${new Date().toLocaleDateString()}`}
-      onChange={handleChange} 
-      style={{backgroundColor: color}}/>
-
-      {data[searchTerm] && (searchTerm.startsWith("e") 
-      ? (<p>L'anniversaire {searchTerm.startsWith("e") ? "d'" + searchTerm : searchTerm} est le {data[searchTerm]}.</p>) 
-      : (<p>L'anniversaire de {searchTerm} est le {data[searchTerm]}.</p>)
-    )}
+      onChange={recherche} 
+      type="text" 
+      placeholder={initialState}
+      value={searchTerm}
+      style={{backgroundColor: color, color: couleur}}
+    />
+      {(<p>{searchResult}</p>)}
   </Fragment> 
 )}
 
-export default SearchBar;
+// 0 : injection initialState dans searchTerm (7)
+// 1 : react return html value = searchTerm === initialSate === ${new Date().toLocaleDateString()}
+// 2 : user change le input, onChange > recherche(24)
+// 3 : recherche met a jour searchTerm (10)
+// 4 : react return html avec value searchTerm === user input
 
+/*
+
+*/
+export default SearchBar

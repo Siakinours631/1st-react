@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <header className="App-header"> 
         <div>
-          <BarreDeRecherche input="reda" color="blue" />
+          <BarreDeRecherche  color="white" couleur='red'/>
         </div>
 
 
