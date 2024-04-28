@@ -1,5 +1,5 @@
-import { Fragment, useState } from "react"
-import user from "./data/annivs.json"
+import { Fragment, useState, useEffect } from "react"
+import users from "./data/annivs.json"
 
 const SearchBar = ({color, couleur}) => {
   let options = {day: '2-digit', month: '2-digit'}
@@ -8,28 +8,44 @@ const SearchBar = ({color, couleur}) => {
 
   const [searchTerm, setSearchTerm] = useState(initialState)
   const [searchResult, setSearchResult] = useState()
+  const [isValid, setValid] = useState(true)
+  
+  /* 
+isTouch     IsValid     searchTerm       searchResult                                                     template
+true        true        '25/09'          'kaiss'                                                          l'anniv de kaiss ajd, le 25/09
+true        false       'abc'            'Aucun anniversaire trouvé à cette date, désolé.'                pas d'anniv ajd
+false       true        '04/09'          'cedric'                                                         l'anniv de ced ajd, le 04/09
+false       false       'abc'            'bonjour(initialStateResult)'                                    pas d'anniv ajd
+
+isTouch && isValid && l'anniv de {searchResult} est ajd, le {searchTerm}  
+isTouch && !isValid && {searchResult}
+!isTouch && isValid && l'anniv de {searchResult} est ajd, le {searchTerm} 
+!isTouch && !isValid && {searchResult}
 
 
-  const recherche = (e) => {
-    const date = e.target.value
+isTouch && !isValid && {searchResult}
+!isTouch && !isValid && {searchResult}
+isTouch && isValid && l'anniv de {searchResult} est ajd, le {searchTerm}  
+!isTouch && isValid && l'anniv de {searchResult} est ajd, le {searchTerm} 
+*/
+  useEffect(() => {
+    const rxDate = /^[0-9]{2}\/[0-9]{2}$/
 
-    const userFound = user.find(user => user.date === date)
-      if(userFound)  
-        {
-          setSearchResult(userFound.name)
-        }  
-      else {
-        setSearchResult('Aucun anniversaire trouvé à cette date, désolé.')
+    if (rxDate.test(searchTerm) === false) {
+      setSearchResult('Date invalide')
+      setValid(false)
+    } else {
+      const userFound = users.find(users => users.date === searchTerm)
+        if (userFound) {
+            setSearchResult(userFound.name)
+            setValid(true)
+        } else {
+          setSearchResult('Aucun anniversaire trouvé à cette date, désolé.')
+          setValid(false)
         }
-      if(date.length > 5 || date.length < 5)
-        {
-          setSearchResult('Date invalide')
-        }
-    
-      setSearchTerm(date)
-  }
-
-
+    }
+  }, [searchTerm])
+  
     /*
       if (users[userIndex].date === date) {
         users[userIndex].name 
@@ -46,34 +62,23 @@ const SearchBar = ({color, couleur}) => {
 return (
   <Fragment>
     <input
-      onChange={recherche} 
+      onChange={(e) => setSearchTerm(e.target?.value)} 
       type="text" 
       placeholder={fullDate}
       value={searchTerm}
       style={{backgroundColor: color, color: couleur}}
     />
-    {searchResult && searchResult !== 'Date invalide' && searchResult !== 'Aucun anniversaire trouvé à cette date, désolé.' && 
+    {isValid && 
     (<p>C'est l'anniversaire de {searchResult} aujourd'hui ! Le {searchTerm}</p>)
     }
 
-    {searchResult === 'Aucun anniversaire trouvé à cette date, désolé.' && 
+    {/*searchResult === 'Aucun anniversaire trouvé à cette date, désolé.' && 
     (<p>{searchResult}</p>)
-    }
+  */}
 
-    {searchResult === 'Date invalide' && (<p>{searchResult}</p>)
-    }
+{!isValid && (<p>{searchResult}</p>)}
    
   </Fragment> 
 )}
-
-
-
-  /* 
-   0 : injection initialState dans searchTerm (7)
-    1 : react return html value = searchTerm === initialSate === ${new Date().toLocaleDateString()}
-   2 : user change le input, onChange > recherche(24)
-   3 : recherche met a jour searchTerm (10)
-   4 : react return html avec value searchTerm === user input
-  */
 
 export default SearchBar
